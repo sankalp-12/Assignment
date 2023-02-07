@@ -1,0 +1,36 @@
+{{template "base" .}}
+
+{{define "content" }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-5">Read from a CSV file</h1>
+                <hr>
+                <form method="post" action="/" enctype="multipart/form-data">
+                    <label for="file">Choose the CSV file to upload</label>
+                    <br> <br>
+                    <input type="file" id="file" name="file" multiple />
+                    <br> <br>
+                    <input type="submit" id="submit" name="submit" value="Submit" />
+                    <br> <br>
+                </form>
+                <div id="output" class="mt-5 bg-dark text-white" style="outline: 1px solid silver; padding: 2em;">
+                    <span class="text-muted">Table showed here...               
+                    {{if .}}
+                        <table>
+                        {{range .}}  
+                            <tr>
+                            {{range .Row}}
+                                <td> <strong>{{.}}</strong> </td> 
+                            {{end}} 
+                            </tr>
+                        {{end}}
+                        </table>
+                    {{end}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
+
