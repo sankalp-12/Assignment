@@ -1,0 +1,57 @@
+{{template "base" .}}
+
+{{define "content" }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-5">Check status of multiple websites concurrently</h1>
+                <hr>
+                <form method="post" action="/" enctype="application/x-www-form-urlencoded">
+                    <label for="URL">Upload the URLs you want to check the status for. Please do not upload above 10 URLs at a time!</label>
+                    <br> <br>
+                    <input type="button" onclick='addInput()' value="Add a URL" />
+                    <input type="submit" id="submit" name="submit" value="Submit" />
+                    <br> <br>
+                    <div id ="url-cont"> <hr> </div>
+                </form>      
+                    {{if .}}
+                        <ul class="w3-ul">
+                        {{range .}}
+                            {{if .YesNo}}
+                                <li class="w3-hover-green">{{.Site}}</li>
+                                <br>
+                            {{else}}
+                                <li class="w3-hover-red">{{.Site}}</li>
+                                <br>
+                            {{end}}
+                        {{end}} 
+                        </ul>
+                    {{end}}
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+    <script>
+        const URLcontainer = document.getElementById('url-cont');
+        var maxInputAllowed = 10;
+        var URLcount = 0;
+        
+        // Call addInput() function on button click
+        function addInput(){
+            URLcount++; 
+            if(URLcount>10){
+                alert('You can add maximum 10 URLs.');
+                return;
+            }
+            let input = document.createElement('input');
+            input.placeholder = 'https://www.example.com';
+            input.type = "url";
+            input.name = "member" + URLcount;
+            URLcontainer.appendChild(input); 
+            URLcontainer.appendChild(document.createElement("br"));
+            URLcontainer.appendChild(document.createElement("br"));
+        }
+    </script>
+{{end}}
