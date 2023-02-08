@@ -18,10 +18,10 @@
                         <ul class="w3-ul">
                         {{range .}}
                             {{if .YesNo}}
-                                <li class="w3-hover-green">{{.Site}}</li>
+                                <li class="list-group-item list-group-item-success">{{.Site}}</li>
                                 <br>
                             {{else}}
-                                <li class="w3-hover-red">{{.Site}}</li>
+                                <li class="list-group-item list-group-item-danger">{{.Site}}</li>
                                 <br>
                             {{end}}
                         {{end}} 
