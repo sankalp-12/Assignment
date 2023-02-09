@@ -1,2 +1,2 @@
-# Assignment
-Tasks for Zocket
+# Task-1
+Simple "Hello World!" Application in Golang
