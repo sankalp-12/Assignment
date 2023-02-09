@@ -1,0 +1,80 @@
+{{template "base" .}}
+
+{{define "content" }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-5">CRUD Application to manage GSoC 2023 data</h1>
+                <hr>
+                <ul>
+                <li><strong>Create:</strong> Creates a new record with the given details. <strong>At least ID required.</strong></li>
+                <li><strong>Read:</strong> Displays the updated table. Note that the table is initially populated with 2 records. <strong>No input required.</strong></li>
+                <li><strong>Update:</strong> Updates the record if there exists a record with a matching ID. Otherwise, a new record is added. <strong>At least ID required.</strong></li>
+                <li><strong>Delete:</strong> Deletes the record from the table with the given ID. If no matches found, table remains unchanged. <strong>At least ID required.</strong></li>
+                </ul>
+                <hr>
+                <form id="new" method="post" action="/" enctype="application/x-www-form-urlencoded">
+                    <label for="rid">ID</label><br>
+                    <input type="text" name="rid"><br><br> 
+                    <label for="org">Name of the Organization</label><br>
+                    <input type="text" name="org"><br><br>
+                    <label for="idea">Project Idea</label><br>
+                    <input type="text" name="idea"><br><br>
+                    <label for="len">Duration</label><br>
+                    <input type="text" name="len"><br><br>
+                    <label for="diff">Difficulty</label><br>
+                    <input type="text" name="diff"><br><br>
+                    <label for="stage">Progress So Far</label><br>
+                    <input type="text" name="stage"><br><br>
+                    <input type="submit" id="Create" formaction="/create" name="submit" value="Create" />
+                    &nbsp;&nbsp;
+                    <input type="submit" id="Read" formaction="/read" name="submit" value="Read" />
+                    &nbsp;&nbsp;
+                    <input type="submit" id="Update" formaction="/update" name="submit" value="Update" />
+                    &nbsp;&nbsp;
+                    <input type="submit" id="Delete" formaction="/delete" name="submit" value="Delete" />
+                    &nbsp;&nbsp;
+                </form>
+                <hr>
+                {{if .ShowMessage}}
+                    <ul>
+                        <li class="list-group-item list-group-item-success">{{.Message}}</li>
+                    </ul>
+                {{end}}
+                <hr>
+                <div id="output" class="mt-5 bg-dark text-white" style="outline: 1px solid silver; padding: 2em; width: max-content">
+                    <span class="text-muted">Table showed here...               
+                    {{if .}}
+                        {{if .ShowTable}}
+                            <table>
+                            {{range .Table}}  
+                                <tr>
+                                {{if .ID}}
+                                    <td> <strong>{{.ID}}</strong> </td> 
+                                {{end}}
+                                {{if .Name}}
+                                    <td> <strong>{{.Name}}</strong> </td> 
+                                {{end}}
+                                {{if .Idea}}
+                                    <td> <strong>{{.Idea}}</strong> </td> 
+                                {{end}}
+                                {{if .Duration}}
+                                    <td> <strong>{{.Duration}}</strong> </td> 
+                                {{end}} 
+                                {{if .Difficulty}}
+                                    <td> <strong>{{.Difficulty}}</strong> </td> 
+                                {{end}}
+                                {{if .Progress}}
+                                    <td> <strong>{{.Progress}}</strong> </td> 
+                                {{end}}
+                                </tr>
+                            {{end}}
+                            </table>
+                        {{end}}
+                    {{end}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
